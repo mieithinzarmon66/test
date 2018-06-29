@@ -1,0 +1,101 @@
+<!doctype html><html><body>
+<FORM name="Cal" action="" >
+<table border="1">
+<tr><input name="txt1" id="output" type="Text" size="13" value="" readonly></tr>
+<tr>
+<td>
+<input id="btn1" type="button" value="1" onclick="DisplyNum(1)"></td>
+<td><input id="btn2" type="button" value="2" onclick="DisplyNum(2)"></td>
+<td><input id="btn3" type="button" value="3" onclick="DisplyNum(3)"></td>
+<td><input id="btnplus" type="button" value="+" onclick="Operation('+')"></td>
+</tr>
+<tr>
+<td><input id="btn4" type="button" value="4" onclick="DisplyNum(4)"></td>
+<td><input id="btn5" type="button" value="5" onclick="DisplyNum(5)"></td>
+<td><input id="btn6" type="button" value="6" onclick="DisplyNum(6)"></td>
+<td><input id="btnminus" type="button" value="-" onclick="Operation('-')"></td>
+</tr>
+<tr>
+<td><input id="btn7" type="button" value="7" onclick="DisplyNum(7)"></td>
+<td>
+<input id="btn8" type="button" value="8" onclick="DisplyNum(8)"></td>
+<td><input id="btn9" type="button" value="9" onclick="DisplyNum(9)"></td>
+<td><input id="btnmultiply" type="button" value="*" onclick="Operation('*')"></td>
+
+</tr>
+<tr>
+<td><input id="btnC" type="button" value="C" onclick="Clear()"></td>
+<td><input id="btn0" type="button" value="0" onclick="DisplyNum(0)"></td>
+<td><input id="btnequals" type="button" value="=" onclick="Operation('=')"></td>
+<td><input id="btndivide" type="button" value="/" onclick="Operation('/')"></td>
+</tr>
+</table></FORM>
+<script>
+var FCal=document.Cal;
+var result=0;
+var NewNum=false;
+var Push="";
+function DisplyNum(Num)
+{
+if (NewNum)
+{
+FCal.txt1.value=Num;
+NewNum=false;
+}
+else{
+if(FCal.txt1.value == '0')
+FCal.txt1.value=Num;
+else
+FCal.txt1.value +=Num;
+}
+}
+function Operation(Op)
+{
+var Readout=FCal.txt1.value;
+if(NewNum && Push != "=");
+else {
+NewNum=true;
+if ('+'== Push)
+result += parseFloat(Readout);
+else if('-'== Push)
+result -= parseFloat(Readout);
+else if('*'== Push)
+result *= parseFloat(Readout);
+else if('/'== Push)
+result /= parseFloat(Readout);
+else result=parseFloat(Readout);
+
+
+FCal.txt1.value=result;
+Push=Op;
+}
+}
+function Decimal()
+{
+var curReadOut=FCal.txt1.value;
+if (NewNum)
+{
+curReadOut="0.";
+NewNum=false;
+}
+else
+ {
+if(curReadOut.indexOf(".")==-1)
+curReadOut +=".";
+}
+
+FCal.txt1.value=curReadOut;
+}
+
+function ClearEntry()
+{
+FCal.txt1.value="";
+
+NewNum=true;
+}
+function Clear()
+{
+result=0;
+Push="";
+ClearEntry();
+}</script></body></html>
